@@ -3,12 +3,18 @@ package Utilities;
 import com.ethoca.pages.AbstractPage;
 import com.ethoca.pages.WomenMegaMenu;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import javax.swing.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,7 +31,6 @@ public class TestUtil extends AbstractPage {
     public static Map<String, List<String>> readTable(WebElement table){
 
         Map<String, List<String>> objTable = new HashMap<String, List<String>>();
-//        String tableXpath ="//div[@id='detailInfoDiv']//tr";
         List<WebElement> objRows = table.findElements(By.xpath("//tr"));
         for(int iCount=0; iCount<objRows.size(); iCount++){
             List<WebElement> objCol = objRows.get(iCount).findElements(By.tagName("td"));
@@ -35,7 +40,6 @@ public class TestUtil extends AbstractPage {
             }
             objTable.put(String.valueOf(iCount), columns);
         }
-
         return objTable;
     }
 
@@ -80,22 +84,7 @@ public class TestUtil extends AbstractPage {
        Actions actions = new Actions(driver);
         actions.moveToElement(element).build().perform();
     }
-//    public static Map<String, List<String>> readTable(String tableName,WebDriver driver){
-//
-//        Map<String, List<String>> objTable = new HashMap<String, List<String>>();
-//        String tableXpath ="//div[@id='detailInfoDiv']//tr";
-//        List<WebElement> objRows = driver.findElements(By.xpath(tableXpath));
-//        for(int iCount=0; iCount<objRows.size(); iCount++){
-//            List<WebElement> objCol = objRows.get(iCount).findElements(By.tagName("td"));
-//            List<String> columns = new ArrayList<String>();
-//            for(int col=0; col<objCol.size(); col++){
-//                columns.add(objCol.get(col).getText());
-//            }
-//            objTable.put(String.valueOf(iCount), columns);
-//        }
-//
-//        return objTable;
-//    }
+
 
 
 
@@ -132,4 +121,44 @@ public class TestUtil extends AbstractPage {
 
 
     }
-}
+
+    public static Object[][] readXlsData(String fileName)  {
+
+            File file = new File(System.getProperty("user.dir")+"/src/main/resources/testData/"+fileName);
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        XSSFWorkbook wb = null;
+        try {
+            wb = new XSSFWorkbook(fis);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        XSSFSheet sheet = wb.getSheetAt(0);
+
+        try {
+            wb.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int lastRowNum = sheet.getLastRowNum() ;
+            int lastCellNum = sheet.getRow(0).getLastCellNum();
+            Object[][] obj = new Object[lastRowNum][1];
+
+            for (int i = 0; i < lastRowNum; i++) {
+                Map<Object, Object> datamap = new HashMap<Object, Object>();
+                for (int j = 0; j < lastCellNum; j++) {
+                    datamap.put(sheet.getRow(0).getCell(j).toString(), sheet.getRow(i+1).getCell(j).toString());
+                }
+                obj[i][0] = datamap;
+
+            }
+            return  obj;
+        }
+
+    }
+

@@ -58,10 +58,10 @@ public class BaseTest {
 		
 	}
 	
-//	@AfterMethod
-//	public void tearDown(){
-//		driver.quit();
-//	}
+	@AfterMethod
+	public void tearDown(){
+		driver.quit();
+	}
 
 //	@Step("Navigate to the Homepage")
 	public LandingPage openSite(){
