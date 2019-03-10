@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,10 +19,13 @@ public class PaymentsPage extends AbstractPage {
     @FindBy(id = "cart_summary")
     private WebElement cartTable;
 
+    @FindBy(xpath = "//td/a/img")
+    private WebElement productImg;
+
     @FindBy(xpath ="//td[@data-title= \"Total\"]" )
     private WebElement itemTotalPrice;
 
-    @FindBy(xpath ="//span[contains(@id,'product_price')]/span[@class='price']" )
+    @FindBy(xpath ="//td/span[@class='price']/span[contains(@class,'special')]" )
     private WebElement itemUnitPrice;
 
     @FindBy(xpath ="//span[contains(@id,'product_price')]/span[@class='price-percent-reduction small']" )
@@ -31,7 +35,7 @@ public class PaymentsPage extends AbstractPage {
     private WebElement itemUnitOldPrice;
 
 
-    @FindBy(xpath ="//input[@class='cart_quantity_input form-control grey']" )
+    @FindBy(xpath ="//td[@class='cart_quantity text-center']" )
     private WebElement itemQty;
 
     @FindBy(id = "total_product")
@@ -53,11 +57,34 @@ public class PaymentsPage extends AbstractPage {
     @FindBy(className = "cart_avail")
     private WebElement availability;
 
+    @FindBy(className = "product-name")
+    private WebElement productDescription;
+
+//String product,String Description,String availability,String unitPrice,String qty,String total,String totalProducts, String totalShipping,String finalTotal,String shippingAddress, String billingAddress){
+
+    public void readCartTable(){
+
+        Map<String,String> cartValues = new HashMap<String, String>();
+
+        cartValues.put("productImage", productImg.getAttribute("alt"));
+        cartValues.put("productDescription", productDescription.getText());
+        cartValues.put("availability", availability.getText());
+        cartValues.put("itemUnitPrice", itemUnitPrice.getText());
+        cartValues.put("itemUnitDiscount", itemUnitDiscount.getText());
+        cartValues.put("itemUnitOldPrice", itemUnitOldPrice.getText());
+        cartValues.put("itemQty", itemQty.getText());
+        cartValues.put("itemTotalPrice", itemTotalPrice.getText());
+        cartValues.put("totalProductPrice", totalProductPrice.getText());
+        cartValues.put("totalShippingPrice", totalShippingPrice.getText());
+        cartValues.put("totalPrice", totalPrice.getText());
+
+        System.out.println(cartValues);
 
 
-    public void validateCartTable(String product,String Description,String availability,String unitPrice,String qty,String total,String totalProducts, String totalShipping,String finalTotal,String shippingAddress, String billingAddress){
 
-//        Map<String, List<String>> productTable = TestUtil.readTable(cartTable);
+
+
+
 
     }
 }

@@ -9,6 +9,7 @@ import com.ethoca.pages.cart.*;
 import com.ethoca.pages.signin.Addresses;
 import com.ethoca.pages.signin.CreateAccountPage;
 import com.ethoca.pages.signin.SignInPage;
+import org.openqa.selenium.By;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -37,14 +38,17 @@ public class ValidateCartTest extends BaseTest {
         SignInPage signInPage=cartSummaryPage.proceedToCheckout();
         CreateAccountPage createAccountPage= signInPage.createNewAccount();
 
-       Addresses addresses = createAccountPage.registerNewUser(TestUtil.generateUserData());
+        Addresses addresses = createAccountPage.registerNewUser(TestUtil.generateUserData());
         addresses.proceedToCheckout();
         ShippingPage shippingPage = new ShippingPage(driver);
 
         shippingPage.acceptTermsAndCheckout();
 
+//        System.out.println(TestUtil.readHeading(driver.findElement(By.id("cart_summary"))));
+//        System.out.println(TestUtil.readTableBody(driver.findElement(By.id("cart_summary"))));
+        PaymentsPage paymentsPage = new PaymentsPage(driver);
 
-
+        paymentsPage.readCartTable();
 
     }
 }
