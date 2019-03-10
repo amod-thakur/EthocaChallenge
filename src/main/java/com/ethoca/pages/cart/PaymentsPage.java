@@ -1,14 +1,12 @@
 package com.ethoca.pages.cart;
 
-import Utilities.TestUtil;
 import com.ethoca.pages.AbstractPage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class PaymentsPage extends AbstractPage {
@@ -57,17 +55,25 @@ public class PaymentsPage extends AbstractPage {
     @FindBy(className = "cart_avail")
     private WebElement availability;
 
-    @FindBy(className = "product-name")
-    private WebElement productDescription;
+    @FindBy(xpath = "//p[@class='product-name']/a")
+    private WebElement productName;
+
+    @FindBy(xpath = "//td[@class='cart_description']/small/a")
+    private WebElement productSpecs;
+
+    @FindBy(className = "cart_ref")
+    private WebElement sku;
 
 //String product,String Description,String availability,String unitPrice,String qty,String total,String totalProducts, String totalShipping,String finalTotal,String shippingAddress, String billingAddress){
 
-    public void readCartTable(){
+    public Map<String, String> readCartTable(){
 
         Map<String,String> cartValues = new HashMap<String, String>();
+        String productDescription = productName.getText() + " " + sku.getText() + " " +productSpecs.getText();
 
-        cartValues.put("productImage", productImg.getAttribute("alt"));
-        cartValues.put("productDescription", productDescription.getText());
+        cartValues.put("productImageAlt", productImg.getAttribute("alt"));
+        cartValues.put("productImageURL", productImg.getAttribute("src"));
+        cartValues.put("productDescription", productDescription);
         cartValues.put("availability", availability.getText());
         cartValues.put("itemUnitPrice", itemUnitPrice.getText());
         cartValues.put("itemUnitDiscount", itemUnitDiscount.getText());
@@ -77,8 +83,8 @@ public class PaymentsPage extends AbstractPage {
         cartValues.put("totalProductPrice", totalProductPrice.getText());
         cartValues.put("totalShippingPrice", totalShippingPrice.getText());
         cartValues.put("totalPrice", totalPrice.getText());
-
         System.out.println(cartValues);
+       return cartValues;
 
 
 

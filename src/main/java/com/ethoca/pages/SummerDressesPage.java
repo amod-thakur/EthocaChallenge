@@ -29,4 +29,10 @@ public class SummerDressesPage extends AbstractPage{
         return itemSpecificationSelection.addItemToCart(size);
     }
 
+    public LandingPage continueShopping(){
+        CartDialog cartDialog = new CartDialog(driver);
+        cartDialog.continueShopping();
+        return new LandingPage((driver));
+    }
+
 }

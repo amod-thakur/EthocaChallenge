@@ -2,6 +2,7 @@ package com.ethoca.pages;
 
 import com.ethoca.pages.cart.CartDialog;
 import com.ethoca.pages.cart.CartSection;
+import com.ethoca.pages.cart.CartSummaryPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -113,6 +114,13 @@ public class LandingPage  extends AbstractPage{
 	public CartSection viewCart(){
 		headerSection.openCartMenu();
 		return new CartSection(driver);
+	}
+
+	public CartSummaryPage navigateToCheckoutPage(){
+
+		CartSection cartSection = headerSection.openCartMenu();
+		cartSection.checkout();
+		return new CartSummaryPage(driver);
 	}
 	
 
