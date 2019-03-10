@@ -15,6 +15,7 @@ public class CartSummaryPage extends AbstractPage {
 
 
     public SignInPage proceedToCheckout(){
+
         buttonsSection.proceedToCheckOut();
         return new SignInPage(driver);
     }

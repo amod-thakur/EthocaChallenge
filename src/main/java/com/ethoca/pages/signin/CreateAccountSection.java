@@ -1,5 +1,6 @@
 package com.ethoca.pages.signin;
 
+import Utilities.TestUtil;
 import com.ethoca.pages.AbstractPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,4 +16,11 @@ public class CreateAccountSection extends AbstractPage {
 
     @FindBy(id ="SubmitCreate")
     private WebElement createAnAccountBtn;
+
+    public CreateAccountPage createAccount(){
+
+        emailAddressField.sendKeys(TestUtil.generateEmail());
+        createAnAccountBtn.click();
+        return new CreateAccountPage(driver);
+    }
 }

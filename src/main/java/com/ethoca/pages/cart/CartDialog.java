@@ -1,12 +1,12 @@
 package com.ethoca.pages.cart;
 
 import com.ethoca.pages.AbstractPage;
+import com.ethoca.pages.LandingPage;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class CartDialog extends AbstractPage {
 	
@@ -18,7 +18,7 @@ public class CartDialog extends AbstractPage {
 	@FindBy(linkText ="Proceed to checkout")
 	private WebElement proceedToCheckOutBtn;
 
-	@FindBy(linkText ="Continue shopping")
+	@FindBy(xpath ="//span[@title ='Continue shopping']")
 	private WebElement continueShoppingBtn;
 
 
@@ -31,8 +31,13 @@ public class CartDialog extends AbstractPage {
 		proceedToCheckOutBtn.click();
 	}
 
-	public void continueShopping(){
-		continueShoppingBtn.click();
+	public LandingPage continueShopping(){
+
+		wait.until(ExpectedConditions.visibilityOf(continueShoppingBtn));
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", continueShoppingBtn);
+//		continueShoppingBtn.click();
+		return new LandingPage(driver);
 	}
 
 }

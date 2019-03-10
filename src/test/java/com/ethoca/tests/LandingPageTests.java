@@ -1,6 +1,8 @@
 package com.ethoca.tests;
 
 
+import Utilities.TestUtil;
+import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import com.ethoca.pages.cart.CartDialog;
 import com.ethoca.pages.LandingPage;
@@ -37,6 +39,8 @@ public class LandingPageTests extends BaseTest{
 		 landingPgObj = openSite();
 		CartDialog cartDialogObj =landingPgObj.addItemToCart();
 		cartDialogObj.proceedToCheckout();
+
+		System.out.println(TestUtil.readTable(driver.findElement(By.id("cart_summary")).findElement(By.xpath("//tfoot"))));
 	}
 		
 	}

@@ -17,7 +17,7 @@ import com.ethoca.pages.LandingPage;
 public class BaseTest {
 	
 	
-	private WebDriver driver;
+	protected WebDriver driver;
 //	private Properties prop;
 	private final String baseURL = "http://automationpractice.com/index.php";
 	private final String chromeDriverPath = "src/test/resources/lib/chromedriver.exe";
@@ -40,7 +40,7 @@ public class BaseTest {
 //	}
 	
 	@BeforeMethod
-	public void setup(){
+	public void initialise(){
 //		System.setProperty("webdriver.chrome.driver", chromeDriverPath);
 ////		driver = new ChromeDriver();
 //		ChromeOptions chromeOptions = new ChromeOptions();
@@ -58,10 +58,10 @@ public class BaseTest {
 		
 	}
 	
-	@AfterMethod
-	public void tearDown(){
-		driver.quit();
-	}
+//	@AfterMethod
+//	public void tearDown(){
+//		driver.quit();
+//	}
 
 //	@Step("Navigate to the Homepage")
 	public LandingPage openSite(){

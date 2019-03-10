@@ -1,6 +1,7 @@
 package com.ethoca.pages;
 
 import com.ethoca.pages.cart.CartDialog;
+import com.ethoca.pages.cart.CartSection;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -43,10 +44,12 @@ public class LandingPage  extends AbstractPage{
 	
 	@FindBy(xpath="//a[@title= 'Add to cart']")
 	private WebElement addToCartBtn;
-	
+
+	private  HeaderSection headerSection;
 	//Intialising the page object factory
 	public LandingPage(WebDriver driver){
 		super(driver);
+		headerSection=new HeaderSection(driver);
 	}
 	
 	//page actions or behaviours
@@ -100,6 +103,16 @@ public class LandingPage  extends AbstractPage{
 		
 //		return new AuthenticationPage();
 		
+	}
+
+	public WomenMegaMenu navigateToWomenMegaMenu(){
+		headerSection.openWomenMegaMenu();
+		return new WomenMegaMenu(driver);
+	}
+
+	public CartSection viewCart(){
+		headerSection.openCartMenu();
+		return new CartSection(driver);
 	}
 	
 
