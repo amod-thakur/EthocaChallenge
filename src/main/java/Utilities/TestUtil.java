@@ -74,4 +74,26 @@ public class TestUtil extends AbstractPage {
     public static String generatePassword(){
         return  RandomStringUtils.randomAlphanumeric(10);
     }
+
+    public static Map<String,String> generateUserData(){
+        Map<String,String> userDetails = new HashMap<String ,String>();
+        userDetails.put("title","Mr");
+        userDetails.put("firstName", generateName());
+        userDetails.put("lastName", generateName());
+        userDetails.put("password", generatePassword());
+        userDetails.put("dob", "20/February /1998");
+        userDetails.put("addressLine1", "1810 N Greenville Ave");
+        userDetails.put("addressLine2", "1234");
+        userDetails.put("city", "Richardson");
+        userDetails.put("state", "Texas");
+        userDetails.put("additionalInfo", "additionalInfo");
+        userDetails.put("homePhone", "12321323213");
+        userDetails.put("mobilePhone", "12321323213");
+        userDetails.put("zip","75081");
+
+        return userDetails;
+
+
+
+    }
 }

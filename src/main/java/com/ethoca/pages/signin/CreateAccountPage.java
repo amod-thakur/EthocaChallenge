@@ -86,7 +86,7 @@ public class CreateAccountPage extends AbstractPage {
     private Select countryDrpDwn = new Select(country);
 
 
-    public void registerNewUser(Map<String,String> userDetails){
+    public Addresses registerNewUser(Map<String,String> userDetails){
 
         wait.until(ExpectedConditions.visibilityOf(registerBtn));
         if(userDetails.get("title").equals("Mr")){
@@ -116,7 +116,7 @@ public class CreateAccountPage extends AbstractPage {
         mobile.sendKeys(userDetails.get("mobilePhone"));
         registerBtn.click();
 
-
+        return new Addresses(driver);
 
 
 

@@ -1,36 +1,27 @@
-package com.ethoca.pages.cart;
+package com.ethoca.pages.signin;
 
 import com.ethoca.pages.AbstractPage;
 import com.ethoca.pages.ButtonsSection;
+import com.ethoca.pages.cart.ShippingPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class ShippingPage extends AbstractPage {
-    public ShippingPage(WebDriver driver) {
+public class Addresses extends AbstractPage {
+    public Addresses(WebDriver driver) {
         super(driver);
-        buttonsSection = new ButtonsSection(driver);
+        buttonsSection= new ButtonsSection(driver);
     }
 
-    private ButtonsSection buttonsSection= null;
-    @FindBy(id = "cgv")
-    private WebElement termsCheckBox;
+    ButtonsSection buttonsSection = null;
 
     @FindBy (xpath = "//button/span[contains(text(),'Proceed')]")
     private WebElement proceedToCheckoutBtn;
 
-
-
-    public PaymentsPage acceptTermsAndCheckout(){
-
-        if(!termsCheckBox.isSelected()){
-            termsCheckBox.click();
-        }
+    public ShippingPage proceedToCheckout(){
         wait.until(ExpectedConditions.visibilityOf(proceedToCheckoutBtn));
         proceedToCheckoutBtn.click();
-        return new PaymentsPage(driver);
-
+        return new ShippingPage(driver);
     }
-
 }

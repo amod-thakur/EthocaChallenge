@@ -3,6 +3,7 @@ package com.ethoca.pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class ButtonsSection extends AbstractPage{
 
@@ -18,6 +19,7 @@ public class ButtonsSection extends AbstractPage{
     private WebElement continueShopping;
 
     public void proceedToCheckOut(){
+        wait.until(ExpectedConditions.visibilityOf(proceedToCheckOutBtn));
         proceedToCheckOutBtn.click();
     }
 
