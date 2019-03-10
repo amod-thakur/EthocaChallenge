@@ -40,6 +40,42 @@ public class TestUtil extends AbstractPage {
     }
 
 
+
+    public static List<String> readHeading(WebElement table){
+
+        List<String> tableHeaders = new ArrayList<String>();
+        List<WebElement> headerText = table.findElements(By.xpath("//thead/tr/th"));
+        for(WebElement heading : headerText){
+            tableHeaders.add(heading.getText());
+            System.out.println(heading.getText());
+
+
+        }
+
+        return  tableHeaders;
+    }
+
+    public static List<List<String>> readTableBody(WebElement table){
+
+        List<List<String>> tableData = new ArrayList<List<String>>();
+        List<WebElement> tableRows = table.findElements(By.xpath("//tbody//tr[contains(@id,'product')]"));
+
+
+        for(WebElement row : tableRows){
+            List<WebElement> tableColumns = row.findElements(By.xpath("//td"));
+            List<String> rowData = new ArrayList<String>();
+            for(WebElement column : tableColumns ){
+                rowData.add(column.getText());
+            }
+            tableData.add(rowData);
+        }
+
+        return tableData;
+
+
+
+    }
+
     public static void hoverOverElement(WebElement element,WebDriver driver){
        Actions actions = new Actions(driver);
         actions.moveToElement(element).build().perform();
