@@ -13,6 +13,11 @@ import org.testng.log4testng.Logger;
 
 import java.util.Map;
 
+/**
+ * This class tests the Cart functionality
+ * @author  Amod Thakur
+ *
+ */
 public class ValidateCartTest extends BaseTest {
     private LandingPage landingPgObj = null;
     private WomenMegaMenu womenMegaMenu = null;
@@ -21,6 +26,7 @@ public class ValidateCartTest extends BaseTest {
     private SoftAssert softAssert = new SoftAssert();
 
     final static Logger log = Logger.getLogger(ValidateCartTest.class);
+
     @BeforeMethod
     public void setup() {
         landingPgObj = openSite();
@@ -31,14 +37,19 @@ public class ValidateCartTest extends BaseTest {
         cartSummaryPage = landingPgObj.navigateToCheckoutPage();
     }
 
-    @Test(dataProvider = "ProductDetails", description = "Validate Cart contents with the test xls")
-    public void validateCartDetails(Map<Object,Object> expectedData){
-//        System.out.println(expectedData);
+
+      @Test(dataProvider = "ProductDetails", description = "Validate Cart contents with the test xls")
+    public void validateAllCartDetails(Map<Object,Object> expectedData){
+
 
         log.info("The expected data is : "+expectedData);
-        PaymentsPage paymentsPage=cartSummaryPage.checkoutAsNewUser();
-        Map<String,String> actualData =paymentsPage.readCartTable();
+
+        CartPaymentsPage cartPaymentsPage =cartSummaryPage.checkoutAsNewUser();
+
+        Map<String,String> actualData = cartPaymentsPage.readCartTable();
+
         log.info("The actual data is : "+actualData);
+
         softAssert.assertEquals(actualData.get("productImageURL"),expectedData.get("productImageURL"),"The image URL doesn't match with the expected value");
 
         softAssert.assertEquals(actualData.get("productImageAlt"),expectedData.get("productImageAlt"),"The image Text doesn't match");
@@ -67,6 +78,10 @@ public class ValidateCartTest extends BaseTest {
     }
 
 
+    /**
+     * Data provider for the test method
+     * @return
+     */
     @DataProvider(name = "ProductDetails")
     public Object[][] getData(){
 

@@ -21,13 +21,13 @@ public class CartSummaryPage extends AbstractPage {
         return new CartSignInPage(driver);
     }
 
-    public PaymentsPage checkoutAsNewUser(){
+    public CartPaymentsPage checkoutAsNewUser(){
         CartSignInPage cartSignInPage = proceedToCheckout();
         CreateAccountPage createAccountPage = cartSignInPage.createNewAccount();
         CartAddressesPage cartAddressesPage = createAccountPage.registerNewUser(TestUtil.generateUserData());
         cartAddressesPage.proceedToCheckout();
-        ShippingPage shippingPage = new ShippingPage(driver);
-        return shippingPage.acceptTermsAndCheckout();
+        CartShippingPage cartShippingPage = new CartShippingPage(driver);
+        return cartShippingPage.acceptTermsAndCheckout();
 
 
     }

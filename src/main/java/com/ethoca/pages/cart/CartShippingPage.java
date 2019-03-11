@@ -1,14 +1,13 @@
 package com.ethoca.pages.cart;
 
 import com.ethoca.pages.AbstractPage;
-import com.ethoca.pages.ButtonsSection;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class ShippingPage extends AbstractPage {
-    public ShippingPage(WebDriver driver) {
+public class CartShippingPage extends AbstractPage {
+    public CartShippingPage(WebDriver driver) {
         super(driver);
 
     }
@@ -22,14 +21,14 @@ public class ShippingPage extends AbstractPage {
 
 
 
-    public PaymentsPage acceptTermsAndCheckout(){
+    public CartPaymentsPage acceptTermsAndCheckout(){
 
         if(!termsCheckBox.isSelected()){
             termsCheckBox.click();
         }
         wait.until(ExpectedConditions.visibilityOf(proceedToCheckoutBtn));
         proceedToCheckoutBtn.click();
-        return new PaymentsPage(driver);
+        return new CartPaymentsPage(driver);
 
     }
 

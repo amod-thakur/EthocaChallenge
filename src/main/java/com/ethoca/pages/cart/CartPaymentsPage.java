@@ -9,8 +9,8 @@ import org.openqa.selenium.support.FindBy;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PaymentsPage extends AbstractPage {
-    public PaymentsPage(WebDriver driver) {
+public class CartPaymentsPage extends AbstractPage {
+    public CartPaymentsPage(WebDriver driver) {
         super(driver);
     }
 
