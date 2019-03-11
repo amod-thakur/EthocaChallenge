@@ -1,6 +1,6 @@
 package com.ethoca.pages.cart;
 
-import Utilities.TestUtil;
+import com.ethoca.utilities.TestUtil;
 import com.ethoca.pages.AbstractPage;
 import com.ethoca.pages.ButtonsSection;
 import com.ethoca.pages.signin.Addresses;

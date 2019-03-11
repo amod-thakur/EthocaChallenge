@@ -1,4 +1,4 @@
-package com.ethoca.listners;
+package com.ethoca.tests.listeners;
 
 
 import com.ethoca.tests.BaseTest;

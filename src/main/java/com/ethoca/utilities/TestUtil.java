@@ -1,4 +1,4 @@
-package Utilities;
+package com.ethoca.utilities;
 
 import com.ethoca.pages.AbstractPage;
 import com.ethoca.pages.WomenMegaMenu;

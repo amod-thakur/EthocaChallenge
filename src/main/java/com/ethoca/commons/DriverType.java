@@ -1,4 +1,8 @@
 package com.ethoca.commons;
 
-public class DriverType {
+public enum DriverType {
+    CHROME,
+    FIREFOX,
+    IE,
+    SAFARI;
 }
