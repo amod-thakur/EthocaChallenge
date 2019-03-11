@@ -23,12 +23,11 @@ public class CartDialog extends AbstractPage {
 
 
 
-	public void proceedToCheckout(){
-//		driver.switchTo().activeElement();
-		System.out.println(driver.getWindowHandle());
+	public CartSummaryPage proceedToCheckout(){
+
 		driver.switchTo().defaultContent();
-		System.out.println(driver.getWindowHandle());
 		proceedToCheckOutBtn.click();
+		return new CartSummaryPage(driver);
 	}
 
 	public LandingPage continueShopping(){

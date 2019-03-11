@@ -7,12 +7,10 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
-public class ItemSpecificationSelection extends AbstractPage{
+public class ItemQuickViewDialog extends AbstractPage{
 
 
-    public ItemSpecificationSelection(WebDriver driver){
-        super(driver);
-    }
+
 
     @FindBy(id = "group_1")
     private WebElement size;
@@ -40,6 +38,10 @@ public class ItemSpecificationSelection extends AbstractPage{
 
     @FindBy(id="wishlist_button")
     private WebElement wishList;
+
+    public ItemQuickViewDialog(WebDriver driver) {
+        super(driver);
+    }
 
 
     public CartDialog addItemToCart(String clothSize){

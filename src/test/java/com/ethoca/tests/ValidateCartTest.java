@@ -19,7 +19,6 @@ import java.util.Map;
  *
  */
 public class ValidateCartTest extends BaseTest {
-    private LandingPage landingPgObj = null;
     private WomenMegaMenu womenMegaMenu = null;
     private SummerDressesPage summerDressesPage = null;
     private CartSummaryPage cartSummaryPage =null;
@@ -29,12 +28,11 @@ public class ValidateCartTest extends BaseTest {
 
     @BeforeMethod
     public void setup() {
-        landingPgObj = openSite();
-        womenMegaMenu =landingPgObj.navigateToWomenMegaMenu();
+        womenMegaMenu =landingPage.navigateToWomenMegaMenu();
         summerDressesPage=  womenMegaMenu.selectSummerDresses();
         summerDressesPage.addDressToCart("M");
-        landingPgObj = summerDressesPage.continueShopping();
-        cartSummaryPage = landingPgObj.navigateToCheckoutPage();
+        landingPage = summerDressesPage.continueShopping();
+        cartSummaryPage = landingPage.navigateToCheckoutPage();
     }
 
 
@@ -52,7 +50,7 @@ public class ValidateCartTest extends BaseTest {
 
         softAssert.assertEquals(actualData.get("productImageURL"),expectedData.get("productImageURL"),"The image URL doesn't match with the expected value");
 
-        softAssert.assertEquals(actualData.get("productImageAlt"),expectedData.get("productImageAlt"),"The image Text doesn't match");
+        softAssert.assertEquals(actualData.get("productImageAlt"),expectedData.get("productImage"),"The image Text doesn't match");
 
         softAssert.assertEquals(actualData.get("productDescription"),expectedData.get("productDescription"),"The product description doesn't match");
 

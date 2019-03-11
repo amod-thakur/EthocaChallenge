@@ -2,12 +2,11 @@ package com.ethoca.utilities;
 
 import com.ethoca.pages.AbstractPage;
 import com.ethoca.pages.WomenMegaMenu;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
@@ -16,10 +15,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Utility class .It contains reusable static methods
@@ -161,6 +158,28 @@ public class TestUtil extends AbstractPage {
                         .contains(partialText.toLowerCase()))
                 .findFirst()
                 .ifPresent(option -> s.selectByValue(option.getAttribute("value")));
+    }
+
+
+    public static void takeScreenshotAtEndOfTest(WebDriver driver) throws IOException {
+        File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        String currentDir = System.getProperty("user.dir");
+        FileUtils.copyFile(scrFile, new File(currentDir + "/screenshots/" + System.currentTimeMillis() + ".png"));
+    }
+
+
+    public static String getScreenshot(WebDriver driver, String screenshotName) throws IOException{
+
+        String dateName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+        TakesScreenshot ts = (TakesScreenshot) driver;
+        File source = ts.getScreenshotAs(OutputType.FILE);
+
+        // after execution, you could see a folder "FailedTestsScreenshots"
+        // under src folder
+        String destination = System.getProperty("user.dir") + "test-output/FailedTestsScreenshots/" + screenshotName +  "_Failed.png";
+        File finalDestination = new File(destination);
+        FileUtils.copyFile(source, finalDestination);
+        return destination;
     }
 
 }

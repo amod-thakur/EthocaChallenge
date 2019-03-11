@@ -19,10 +19,14 @@ public class SummerDressesPage extends AbstractPage{
     @FindBy(xpath = "//a[@title = 'Printed Chiffon Dress' and @class='product_img_link']")
     WebElement printedChiffonDressImg;
 
+    public WebElement getPrintedChiffonDressImg() {
+        return printedChiffonDressImg;
+    }
+
     public CartDialog addDressToCart(String size){
         wait.until(ExpectedConditions.visibilityOf(printedChiffonDressImg));
         printedChiffonDressImg.click();
-        ItemSpecificationSelection itemSpecificationSelection= new ItemSpecificationSelection(driver);
+        ItemQuickViewDialog itemSpecificationSelection= new ItemQuickViewDialog(driver);
         return itemSpecificationSelection.addItemToCart(size);
     }
 
@@ -30,6 +34,12 @@ public class SummerDressesPage extends AbstractPage{
         CartDialog cartDialog = new CartDialog(driver);
         cartDialog.continueShopping();
         return new LandingPage((driver));
+    }
+
+    public ItemQuickViewDialog quickViewDress(){
+        wait.until(ExpectedConditions.visibilityOf(printedChiffonDressImg));
+        printedChiffonDressImg.click();
+        return new ItemQuickViewDialog(driver);
     }
 
 }

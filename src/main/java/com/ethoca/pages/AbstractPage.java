@@ -21,5 +21,9 @@ public abstract class AbstractPage {
         PageFactory.initElements(this.driver,this);
     }
 
+    public String getPageTitle(){
+        return this.driver.getTitle();
+    }
+
 
 }

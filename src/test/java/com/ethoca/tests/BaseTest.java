@@ -20,7 +20,7 @@ public class BaseTest {
 	
 	protected WebDriver driver;
 	private final String baseURL = "http://automationpractice.com/index.php";
-
+	protected LandingPage landingPage = null;
 
 	/**
 	 * This method is executed before every test method of the child class. It takes the browser type for TestNG Parameter and creates corresponding driver.
@@ -35,7 +35,8 @@ public class BaseTest {
 		driver.manage().deleteAllCookies();
 		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		
+
+		landingPage = openSite();
 	}
 
 	/**
