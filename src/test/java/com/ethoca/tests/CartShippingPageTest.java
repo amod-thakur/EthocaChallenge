@@ -31,7 +31,7 @@ public class CartShippingPageTest extends BaseTest {
     }
 
     @Test
-    public void validateShippingPageIsLoaded(){
+     public  void validateShippingPageIsLoaded(){
         Assert.assertTrue(cartShippingPage.isShippingTitlePresent());
     }
 

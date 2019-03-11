@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Ethoca Test Suite" >
+<suite name="Ethoca Test Suite" parallel="tests" thread-count="5" >
     <listeners>
         <listener class-name="com.ethoca.tests.listeners.ExtentReporterNG"/>
     </listeners>
@@ -16,13 +16,7 @@
             <class name="com.ethoca.tests.SummerDressesPageTest"/>
         </classes>
     </test>
-    <test name="Validate Cart Payment Page functionality">
-        <parameter name="browser" value="chrome"/>
-        <classes>
-            <class name="com.ethoca.tests.CartPaymentPageTest"/>
-        </classes>
-    </test>
-    <test name="Validate QucikView dialog functionality">
+    <test name="Validate QuickView dialog functionality">
         <parameter name="browser" value="chrome" />
         <parameter name="size" value="M" />
         <classes>

@@ -26,6 +26,7 @@ public class CartDialog extends AbstractPage {
 	public CartSummaryPage proceedToCheckout(){
 
 		driver.switchTo().defaultContent();
+		wait.until(ExpectedConditions.visibilityOf(proceedToCheckOutBtn));
 		proceedToCheckOutBtn.click();
 		return new CartSummaryPage(driver);
 	}
