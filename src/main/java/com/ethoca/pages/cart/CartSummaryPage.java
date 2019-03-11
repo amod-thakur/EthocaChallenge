@@ -1,11 +1,9 @@
 package com.ethoca.pages.cart;
 
-import Utilities.TestUtil;
+import com.ethoca.utilities.TestUtil;
 import com.ethoca.pages.AbstractPage;
 import com.ethoca.pages.ButtonsSection;
-import com.ethoca.pages.signin.Addresses;
 import com.ethoca.pages.signin.CreateAccountPage;
-import com.ethoca.pages.signin.SignInPage;
 import org.openqa.selenium.WebDriver;
 
 public class CartSummaryPage extends AbstractPage {
@@ -17,17 +15,17 @@ public class CartSummaryPage extends AbstractPage {
     }
 
 
-    private SignInPage proceedToCheckout(){
+    private CartSignInPage proceedToCheckout(){
 
         buttonsSection.proceedToCheckOut();
-        return new SignInPage(driver);
+        return new CartSignInPage(driver);
     }
 
     public PaymentsPage checkoutAsNewUser(){
-        SignInPage signInPage= proceedToCheckout();
-        CreateAccountPage createAccountPage =signInPage.createNewAccount();
-        Addresses addresses = createAccountPage.registerNewUser(TestUtil.generateUserData());
-        addresses.proceedToCheckout();
+        CartSignInPage cartSignInPage = proceedToCheckout();
+        CreateAccountPage createAccountPage = cartSignInPage.createNewAccount();
+        CartAddressesPage cartAddressesPage = createAccountPage.registerNewUser(TestUtil.generateUserData());
+        cartAddressesPage.proceedToCheckout();
         ShippingPage shippingPage = new ShippingPage(driver);
         return shippingPage.acceptTermsAndCheckout();
 

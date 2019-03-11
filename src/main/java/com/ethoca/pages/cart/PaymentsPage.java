@@ -64,7 +64,6 @@ public class PaymentsPage extends AbstractPage {
     @FindBy(className = "cart_ref")
     private WebElement sku;
 
-//String product,String Description,String availability,String unitPrice,String qty,String total,String totalProducts, String totalShipping,String finalTotal,String shippingAddress, String billingAddress){
 
     public Map<String, String> readCartTable(){
 
@@ -83,7 +82,7 @@ public class PaymentsPage extends AbstractPage {
         cartValues.put("totalProductPrice", totalProductPrice.getText());
         cartValues.put("totalShippingPrice", totalShippingPrice.getText());
         cartValues.put("totalPrice", totalPrice.getText());
-        System.out.println(cartValues);
+
        return cartValues;
 
 

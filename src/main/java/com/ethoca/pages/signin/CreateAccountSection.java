@@ -1,6 +1,6 @@
 package com.ethoca.pages.signin;
 
-import Utilities.TestUtil;
+import com.ethoca.utilities.TestUtil;
 import com.ethoca.pages.AbstractPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

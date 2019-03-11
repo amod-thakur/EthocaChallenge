@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-//import io.qameta.allure.Step;
+
 
 
 public class LandingPage  extends AbstractPage{
@@ -72,38 +72,18 @@ public class LandingPage  extends AbstractPage{
 	
 //	@Step("Add an item to Cart")
 	public CartDialog addItemToCart(){
-		System.out.println("The Product is" +productName.getText());
+
 		actions.moveToElement(productName).perform();
 		addToCartBtn.click();
-//		System.out.println(driver.getWindowHandle());
+
 		return new CartDialog(this.driver);
 	}
-//	
-//	public void navigateToCasualDressesPg(){
-//		actions.moveToElement(womenLink).perform();
-//		casualDressesLink.click();
-//		
-//	}
-//	
-//	public void navigateToEveningDressesPg(){
-//		actions.moveToElement(womenLink).perform();
-//		eveningDressesLink.click();
-//		
-//	}
-//	
-//	public void navigateToESummerDressesPg(){
-//		actions.moveToElement(womenLink).perform();
-//		summerDressesLink.click();
-//		
-//	}
-	
-//	@Step("sign in to the website")
+
 	public void clickOnSignInLink(){
 		
 		signInLink.click();
 		
-//		return new AuthenticationPage();
-		
+
 	}
 
 	public WomenMegaMenu navigateToWomenMegaMenu(){

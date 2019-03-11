@@ -1,7 +1,7 @@
 package com.ethoca.tests;
 
 
-import Utilities.TestUtil;
+import com.ethoca.utilities.TestUtil;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import com.ethoca.pages.cart.CartDialog;

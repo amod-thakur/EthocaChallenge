@@ -1,6 +1,6 @@
 package com.ethoca.tests;
 
-import Utilities.TestUtil;
+import com.ethoca.utilities.TestUtil;
 import com.ethoca.pages.LandingPage;
 import com.ethoca.pages.SummerDressesPage;
 import com.ethoca.pages.WomenMegaMenu;
@@ -9,6 +9,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+import org.testng.log4testng.Logger;
 
 import java.util.Map;
 
@@ -19,6 +20,7 @@ public class ValidateCartTest extends BaseTest {
     private CartSummaryPage cartSummaryPage =null;
     private SoftAssert softAssert = new SoftAssert();
 
+    final static Logger log = Logger.getLogger(ValidateCartTest.class);
     @BeforeMethod
     public void setup() {
         landingPgObj = openSite();
@@ -29,11 +31,14 @@ public class ValidateCartTest extends BaseTest {
         cartSummaryPage = landingPgObj.navigateToCheckoutPage();
     }
 
-    @Test(dataProvider = "ProductDetails")
+    @Test(dataProvider = "ProductDetails", description = "Validate Cart contents with the test xls")
     public void validateCartDetails(Map<Object,Object> expectedData){
-        System.out.println(expectedData);
+//        System.out.println(expectedData);
+
+        log.info("The expected data is : "+expectedData);
         PaymentsPage paymentsPage=cartSummaryPage.checkoutAsNewUser();
         Map<String,String> actualData =paymentsPage.readCartTable();
+        log.info("The actual data is : "+actualData);
         softAssert.assertEquals(actualData.get("productImageURL"),expectedData.get("productImageURL"),"The image URL doesn't match with the expected value");
 
         softAssert.assertEquals(actualData.get("productImageAlt"),expectedData.get("productImageAlt"),"The image Text doesn't match");

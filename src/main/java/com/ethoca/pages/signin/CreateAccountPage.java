@@ -1,6 +1,8 @@
 package com.ethoca.pages.signin;
 
 import com.ethoca.pages.AbstractPage;
+import com.ethoca.pages.cart.CartAddressesPage;
+import com.ethoca.utilities.TestUtil;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -80,13 +82,10 @@ public class CreateAccountPage extends AbstractPage {
 
 
     private Select dobDayDropDwn = new Select(dobDay);
-    private Select dobMonthDropDwn = new Select(dobMonth);
     private Select dobYearDropDwn = new Select(dobYear);
-    private Select stateDrpDwn = new Select(state);
-    private Select countryDrpDwn = new Select(country);
 
 
-    public Addresses registerNewUser(Map<String,String> userDetails){
+    public CartAddressesPage registerNewUser(Map<String,String> userDetails){
 
         wait.until(ExpectedConditions.visibilityOf(registerBtn));
         if(userDetails.get("title").equals("Mr")){
@@ -106,8 +105,7 @@ public class CreateAccountPage extends AbstractPage {
         addressLine1.sendKeys(userDetails.get("addressLine1"));
         addressLine2.sendKeys(userDetails.get("addressLine2"));
         city.sendKeys(userDetails.get("city"));
-//        stateDrpDwn.selectByValue(userDetails.get("state"));
-        stateDrpDwn.selectByValue("43");
+        TestUtil.selectOptionByPartText(state,userDetails.get("state"));
         zip.sendKeys(userDetails.get("zip"));
 
         additionalInfo.sendKeys(userDetails.get("additionalInfo"));
@@ -116,9 +114,7 @@ public class CreateAccountPage extends AbstractPage {
         mobile.sendKeys(userDetails.get("mobilePhone"));
         registerBtn.click();
 
-        return new Addresses(driver);
-
-
+        return new CartAddressesPage(driver);
 
     }
 
@@ -127,11 +123,8 @@ public class CreateAccountPage extends AbstractPage {
 
         String[] date=dob.split("/");
 
-
         dobDayDropDwn.selectByValue(date[0]);
-
-        dobMonthDropDwn.selectByIndex(2);
-
+        TestUtil.selectOptionByPartText(dobMonth,date[1]);
         dobYearDropDwn.selectByValue(date[2]);
     }
 
