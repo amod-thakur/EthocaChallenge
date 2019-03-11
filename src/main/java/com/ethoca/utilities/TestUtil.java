@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
 
 import javax.swing.*;
 import java.io.File;
@@ -160,5 +161,18 @@ public class TestUtil extends AbstractPage {
             return  obj;
         }
 
+
+
+
+    public static void selectOptionByPartText(WebElement select, String partialText) {
+        Select s = new Select(select);
+        s.getOptions()
+                .parallelStream()
+                .filter(option -> option.getText().toLowerCase()
+                        .contains(partialText.toLowerCase()))
+                .findFirst()
+                .ifPresent(option -> s.selectByValue(option.getAttribute("value")));
     }
+
+}
 

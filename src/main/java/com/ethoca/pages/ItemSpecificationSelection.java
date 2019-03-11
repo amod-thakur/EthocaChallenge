@@ -3,12 +3,9 @@ package com.ethoca.pages;
 import com.ethoca.pages.cart.CartDialog;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ItemSpecificationSelection extends AbstractPage{
 
@@ -31,9 +28,6 @@ public class ItemSpecificationSelection extends AbstractPage{
 
     @FindBy(id = "add_to_cart")
     private WebElement addToCartBtn;
-//
-//    @FindBy(id="product")
-//    private WebElement productQuickView;
 
     @FindBy(className="fancybox-outer")
     private WebElement productQuickView;
@@ -49,16 +43,10 @@ public class ItemSpecificationSelection extends AbstractPage{
 
 
     public CartDialog addItemToCart(String clothSize){
-//        driver.switchTo().frame(productQuickView);
 
-//        driver.switchTo().frame(productQuickView);
         wait.until(ExpectedConditions.visibilityOf(productQuickView));
         driver.switchTo().frame(productQuickViewiFrame);
-//        driver.switchTo().frame(productSpecSelectionSection);
-//        wait.until(ExpectedConditions.visibilityOf(productQuickView));
-//        wishList.click();
         wait.until(ExpectedConditions.visibilityOf(addToCartBtn));
-
         selectSize(clothSize);
         addToCartBtn.click();
         return new CartDialog(driver);

@@ -10,10 +10,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 public class ShippingPage extends AbstractPage {
     public ShippingPage(WebDriver driver) {
         super(driver);
-        buttonsSection = new ButtonsSection(driver);
+
     }
 
-    private ButtonsSection buttonsSection= null;
+
     @FindBy(id = "cgv")
     private WebElement termsCheckBox;
 

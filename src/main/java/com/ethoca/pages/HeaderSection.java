@@ -22,10 +22,9 @@ public class HeaderSection extends AbstractPage{
 
 
     public CartSection openCartMenu(){
-//        driver.switchTo().parentFrame();
+
         wait.until(ExpectedConditions.visibilityOf(cartMenu));
         TestUtil.hoverOverElement(cartMenu,driver);
-
         return new CartSection(driver);
     }
 

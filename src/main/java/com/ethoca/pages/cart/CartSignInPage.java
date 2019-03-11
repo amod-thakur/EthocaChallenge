@@ -1,12 +1,14 @@
-package com.ethoca.pages.signin;
+package com.ethoca.pages.cart;
 
 import com.ethoca.pages.AbstractPage;
+import com.ethoca.pages.signin.CreateAccountPage;
+import com.ethoca.pages.signin.CreateAccountSection;
 import org.openqa.selenium.WebDriver;
 
-public class SignInPage extends AbstractPage {
+public class CartSignInPage extends AbstractPage {
 
     private CreateAccountSection createAccountSection = null;
-    public SignInPage(WebDriver driver) {
+    public CartSignInPage(WebDriver driver) {
         super(driver);
         createAccountSection= new CreateAccountSection(driver);
     }

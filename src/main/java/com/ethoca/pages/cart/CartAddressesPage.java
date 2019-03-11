@@ -2,7 +2,6 @@ package com.ethoca.pages.cart;
 
 import com.ethoca.pages.AbstractPage;
 import com.ethoca.pages.ButtonsSection;
-import com.ethoca.pages.cart.ShippingPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
