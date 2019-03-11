@@ -5,32 +5,46 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.util.concurrent.TimeUnit;
 
+/**
+ * This class acts as a factor class to instantiate the driver object to appropriate driver based on the value supplied to getDriver() method
+ * @author Amod Thakur
+ *
+ */
 public class DriverManagerFactory {
     private static WebDriver driver;
 
+    /**
+     * This method instantiates respective driver object
+     * @param browser the browser type e.g. chrome
+     * @return an object of the respective driver
+     */
     public static WebDriver getDriver(String browser) {
 
         DriverType driverType = DriverType.valueOf(browser.toUpperCase());
 
         switch (driverType) {
             case CHROME:
+                /**
+                 * Uses WebDriverManager project to automatically manage the binary driver
+                 *  https://github.com/bonigarcia/webdrivermanager
+                 */
                 WebDriverManager.chromedriver().setup();
                 driver = new ChromeDriver();
                 break;
+
             case FIREFOX:
-                System.setProperty("webdriver.gecko.driver",System.getProperty("user.dir")+"src/test/resources/geckodriver.exe");
-//                WebDriverManager.firefoxdriver().setup();
+                /**
+                 * Uses WebDriverManager project to automatically manage the binary driver
+                 *  https://github.com/bonigarcia/webdrivermanager
+                 */
+                WebDriverManager.firefoxdriver().setup();
                 driver = new FirefoxDriver();
                 break;
 
         }
 
-        driver.manage().window().maximize();
-        driver.manage().deleteAllCookies();
-        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
         return driver;
 
     }
