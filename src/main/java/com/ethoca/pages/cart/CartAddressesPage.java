@@ -18,9 +18,9 @@ public class CartAddressesPage extends AbstractPage {
     @FindBy (xpath = "//button/span[contains(text(),'Proceed')]")
     private WebElement proceedToCheckoutBtn;
 
-    public ShippingPage proceedToCheckout(){
+    public CartShippingPage proceedToCheckout(){
         wait.until(ExpectedConditions.visibilityOf(proceedToCheckoutBtn));
         proceedToCheckoutBtn.click();
-        return new ShippingPage(driver);
+        return new CartShippingPage(driver);
     }
 }

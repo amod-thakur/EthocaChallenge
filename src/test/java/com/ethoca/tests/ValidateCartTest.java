@@ -13,35 +13,44 @@ import org.testng.log4testng.Logger;
 
 import java.util.Map;
 
+/**
+ * This class tests the Cart functionality
+ * @author  Amod Thakur
+ *
+ */
 public class ValidateCartTest extends BaseTest {
-    private LandingPage landingPgObj = null;
     private WomenMegaMenu womenMegaMenu = null;
     private SummerDressesPage summerDressesPage = null;
     private CartSummaryPage cartSummaryPage =null;
     private SoftAssert softAssert = new SoftAssert();
 
     final static Logger log = Logger.getLogger(ValidateCartTest.class);
+
     @BeforeMethod
     public void setup() {
-        landingPgObj = openSite();
-        womenMegaMenu =landingPgObj.navigateToWomenMegaMenu();
+        womenMegaMenu =landingPage.navigateToWomenMegaMenu();
         summerDressesPage=  womenMegaMenu.selectSummerDresses();
         summerDressesPage.addDressToCart("M");
-        landingPgObj = summerDressesPage.continueShopping();
-        cartSummaryPage = landingPgObj.navigateToCheckoutPage();
+        landingPage = summerDressesPage.continueShopping();
+        cartSummaryPage = landingPage.navigateToCheckoutPage();
     }
 
-    @Test(dataProvider = "ProductDetails", description = "Validate Cart contents with the test xls")
-    public void validateCartDetails(Map<Object,Object> expectedData){
-//        System.out.println(expectedData);
+
+      @Test(dataProvider = "ProductDetails", description = "Validate Cart contents with the test xls")
+    public void validateAllCartDetails(Map<Object,Object> expectedData){
+
 
         log.info("The expected data is : "+expectedData);
-        PaymentsPage paymentsPage=cartSummaryPage.checkoutAsNewUser();
-        Map<String,String> actualData =paymentsPage.readCartTable();
+
+        CartPaymentsPage cartPaymentsPage =cartSummaryPage.checkoutAsNewUser();
+
+        Map<String,String> actualData = cartPaymentsPage.readCartTable();
+
         log.info("The actual data is : "+actualData);
+
         softAssert.assertEquals(actualData.get("productImageURL"),expectedData.get("productImageURL"),"The image URL doesn't match with the expected value");
 
-        softAssert.assertEquals(actualData.get("productImageAlt"),expectedData.get("productImageAlt"),"The image Text doesn't match");
+        softAssert.assertEquals(actualData.get("productImageAlt"),expectedData.get("productImage"),"The image Text doesn't match");
 
         softAssert.assertEquals(actualData.get("productDescription"),expectedData.get("productDescription"),"The product description doesn't match");
 
@@ -67,6 +76,10 @@ public class ValidateCartTest extends BaseTest {
     }
 
 
+    /**
+     * Data provider for the test method
+     * @return
+     */
     @DataProvider(name = "ProductDetails")
     public Object[][] getData(){
 

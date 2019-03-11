@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Ethoca Test Suite" >
+    <listeners>
+        <listener class-name="com.ethoca.tests.listeners.ExtentReporterNG"/>
+    </listeners>
+    <test name="Validate Landing Page functionality">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="com.ethoca.tests.LandingPageTests"/>
+        </classes>
+    </test>
+    <test name="Validate Summer Dresses Page functionality">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="com.ethoca.tests.SummerDressesPageTest"/>
+        </classes>
+    </test>
+    <test name="Validate Cart Payment Page functionality">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="com.ethoca.tests.ValidateCartTest"/>
+        </classes>
+    </test>
+</suite>

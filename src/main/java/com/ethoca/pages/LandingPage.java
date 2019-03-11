@@ -8,8 +8,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 
-
-
+/**
+ * Landing page of the application.Contains element locators and actions for the Landing page
+ * @author Amod Thakur
+ */
 public class LandingPage  extends AbstractPage{
 	
 	
@@ -47,6 +49,7 @@ public class LandingPage  extends AbstractPage{
 	private WebElement addToCartBtn;
 
 	private  HeaderSection headerSection;
+
 	//Intialising the page object factory
 	public LandingPage(WebDriver driver){
 		super(driver);
@@ -54,28 +57,24 @@ public class LandingPage  extends AbstractPage{
 	}
 	
 	//page actions or behaviours
-	
-//	@Step("Navigate to Shirts page")
+
 	public void navigateToTShirtsPg(){
 		actions.moveToElement(womenLink).build().perform();
 		tShirtLink.click();
 
 		
 	}
-	
-//	@Step("Navigate to Blouses page")
+
 	public void navigateToBlousesPg(){
 		actions.moveToElement(womenLink).perform();
 		blousesLink.click();
 		
 	}
 	
-//	@Step("Add an item to Cart")
 	public CartDialog addItemToCart(){
 
 		actions.moveToElement(productName).perform();
 		addToCartBtn.click();
-
 		return new CartDialog(this.driver);
 	}
 

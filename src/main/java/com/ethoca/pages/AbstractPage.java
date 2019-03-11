@@ -5,6 +5,9 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+/**
+ * Abstract Page class to implement general properties and instantiate driver,wait, elements.
+ */
 public abstract class AbstractPage {
 
     protected WebDriver driver;
@@ -16,6 +19,10 @@ public abstract class AbstractPage {
         this.wait= new WebDriverWait(this.driver,30);
         this.actions = new Actions(this.driver);
         PageFactory.initElements(this.driver,this);
+    }
+
+    public String getPageTitle(){
+        return this.driver.getTitle();
     }
 
 

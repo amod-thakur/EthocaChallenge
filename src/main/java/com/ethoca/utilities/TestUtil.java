@@ -2,12 +2,11 @@ package com.ethoca.utilities;
 
 import com.ethoca.pages.AbstractPage;
 import com.ethoca.pages.WomenMegaMenu;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
@@ -16,91 +15,70 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+/**
+ * Utility class .It contains reusable static methods
+ * @author Amod Thaur
+ *
+ */
+
 
 public class TestUtil extends AbstractPage {
 
 
-
+    /**
+     * @param driver
+     */
     public TestUtil(WebDriver driver) {
         super(driver);
     }
 
-    public static Map<String, List<String>> readTable(WebElement table){
-
-        Map<String, List<String>> objTable = new HashMap<String, List<String>>();
-        List<WebElement> objRows = table.findElements(By.xpath("//tr"));
-        for(int iCount=0; iCount<objRows.size(); iCount++){
-            List<WebElement> objCol = objRows.get(iCount).findElements(By.tagName("td"));
-            List<String> columns = new ArrayList<String>();
-            for(int col=0; col<objCol.size(); col++){
-                columns.add(objCol.get(col).getText());
-            }
-            objTable.put(String.valueOf(iCount), columns);
-        }
-        return objTable;
-    }
 
 
 
-    public static List<String> readHeading(WebElement table){
 
-        List<String> tableHeaders = new ArrayList<String>();
-        List<WebElement> headerText = table.findElements(By.xpath("//thead/tr/th"));
-        for(WebElement heading : headerText){
-            tableHeaders.add(heading.getText());
-            System.out.println(heading.getText());
-
-
-        }
-
-        return  tableHeaders;
-    }
-
-    public static List<List<String>> readTableBody(WebElement table){
-
-        List<List<String>> tableData = new ArrayList<List<String>>();
-        List<WebElement> tableRows = table.findElements(By.xpath("//tbody//tr[contains(@id,'product')]"));
-
-
-        for(WebElement row : tableRows){
-            List<WebElement> tableColumns = row.findElements(By.xpath("//td"));
-            List<String> rowData = new ArrayList<String>();
-            for(WebElement column : tableColumns ){
-                rowData.add(column.getText());
-            }
-            tableData.add(rowData);
-        }
-
-        return tableData;
-
-
-
-    }
-
+    /**
+     * This method is used to hover over an Element on the page
+     * @param element
+     * @param driver
+     */
     public static void hoverOverElement(WebElement element,WebDriver driver){
-       Actions actions = new Actions(driver);
+        Actions actions = new Actions(driver);
         actions.moveToElement(element).build().perform();
     }
 
 
-
-
+    /**
+     * This method is used to generate random email id ending in @test.com
+     * @return generated emailAddress
+     */
     public static String generateEmail(){
 
         return RandomStringUtils.randomAlphabetic(6) + "@test.com";
     }
 
+    /**
+     * This method is used to generate a random 6 character name
+     * @return
+     */
     public static String generateName(){
         return RandomStringUtils.randomAlphabetic(6);
     }
+
+    /**
+     * This method is used to generate a random 10 character password.
+     * @return
+     */
     public static String generatePassword(){
         return  RandomStringUtils.randomAlphanumeric(10);
     }
 
+    /**
+     * This method is used to generate the user details required for creating an account
+     * @return - a Map containing the user data
+     */
     public static Map<String,String> generateUserData(){
         Map<String,String> userDetails = new HashMap<String ,String>();
         userDetails.put("title","Mr");
@@ -123,9 +101,14 @@ public class TestUtil extends AbstractPage {
 
     }
 
+    /**
+     * This method is used to read the data from xls file and send it as a map to the DataProvider class
+     * @param fileName the file which contains the test data
+     * @return a map of object, object containing the test data
+     */
     public static Object[][] readXlsData(String fileName)  {
 
-            File file = new File(System.getProperty("user.dir")+"/src/main/resources/testData/"+fileName);
+        File file = new File(System.getProperty("user.dir")+"/src/main/resources/testData/"+fileName);
         FileInputStream fis = null;
         try {
             fis = new FileInputStream(file);
@@ -162,8 +145,11 @@ public class TestUtil extends AbstractPage {
         }
 
 
-
-
+    /**
+     * This method is used to select a drop down option using its partial display text
+     * @param select - the element identifier for the drop down
+     * @param partialText - partial text for selection
+     */
     public static void selectOptionByPartText(WebElement select, String partialText) {
         Select s = new Select(select);
         s.getOptions()
@@ -172,6 +158,28 @@ public class TestUtil extends AbstractPage {
                         .contains(partialText.toLowerCase()))
                 .findFirst()
                 .ifPresent(option -> s.selectByValue(option.getAttribute("value")));
+    }
+
+
+    public static void takeScreenshotAtEndOfTest(WebDriver driver) throws IOException {
+        File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        String currentDir = System.getProperty("user.dir");
+        FileUtils.copyFile(scrFile, new File(currentDir + "/screenshots/" + System.currentTimeMillis() + ".png"));
+    }
+
+
+    public static String getScreenshot(WebDriver driver, String screenshotName) throws IOException{
+
+        String dateName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+        TakesScreenshot ts = (TakesScreenshot) driver;
+        File source = ts.getScreenshotAs(OutputType.FILE);
+
+        // after execution, you could see a folder "FailedTestsScreenshots"
+        // under src folder
+        String destination = System.getProperty("user.dir") + "test-output/FailedTestsScreenshots/" + screenshotName +  "_Failed.png";
+        File finalDestination = new File(destination);
+        FileUtils.copyFile(source, finalDestination);
+        return destination;
     }
 
 }
