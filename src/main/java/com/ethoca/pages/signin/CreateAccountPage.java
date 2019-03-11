@@ -1,6 +1,7 @@
 package com.ethoca.pages.signin;
 
 import com.ethoca.pages.AbstractPage;
+import com.ethoca.pages.cart.CartAddressesPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -86,7 +87,7 @@ public class CreateAccountPage extends AbstractPage {
     private Select countryDrpDwn = new Select(country);
 
 
-    public Addresses registerNewUser(Map<String,String> userDetails){
+    public CartAddressesPage registerNewUser(Map<String,String> userDetails){
 
         wait.until(ExpectedConditions.visibilityOf(registerBtn));
         if(userDetails.get("title").equals("Mr")){
@@ -116,7 +117,7 @@ public class CreateAccountPage extends AbstractPage {
         mobile.sendKeys(userDetails.get("mobilePhone"));
         registerBtn.click();
 
-        return new Addresses(driver);
+        return new CartAddressesPage(driver);
 
 
 

@@ -1,4 +1,4 @@
-package com.ethoca.pages.signin;
+package com.ethoca.pages.cart;
 
 import com.ethoca.pages.AbstractPage;
 import com.ethoca.pages.ButtonsSection;
@@ -8,8 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class Addresses extends AbstractPage {
-    public Addresses(WebDriver driver) {
+public class CartAddressesPage extends AbstractPage {
+    public CartAddressesPage(WebDriver driver) {
         super(driver);
         buttonsSection= new ButtonsSection(driver);
     }
