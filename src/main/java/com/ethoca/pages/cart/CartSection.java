@@ -24,4 +24,10 @@ public class CartSection extends AbstractPage {
         return new CartSummaryPage(driver);
     }
 
+    public Boolean isCheckoutBtnPresent(){
+        driver.switchTo().defaultContent();
+        wait.until(ExpectedConditions.visibilityOf(checkoutBtn));
+        return  checkoutBtn.isDisplayed();
+    }
+
 }

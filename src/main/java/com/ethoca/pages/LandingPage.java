@@ -101,6 +101,10 @@ public class LandingPage  extends AbstractPage{
 		cartSection.checkout();
 		return new CartSummaryPage(driver);
 	}
+
+	public Boolean isWomenMegaMenuDisplayed(){
+		return womenLink.isDisplayed();
+	}
 	
 
 }

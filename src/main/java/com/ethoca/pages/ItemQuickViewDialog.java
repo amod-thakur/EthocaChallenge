@@ -46,8 +46,7 @@ public class ItemQuickViewDialog extends AbstractPage{
 
     public CartDialog addItemToCart(String clothSize){
 
-        wait.until(ExpectedConditions.visibilityOf(productQuickView));
-        driver.switchTo().frame(productQuickViewiFrame);
+        switchToQuickView();
         wait.until(ExpectedConditions.visibilityOf(addToCartBtn));
         selectSize(clothSize);
         addToCartBtn.click();
@@ -57,5 +56,18 @@ public class ItemQuickViewDialog extends AbstractPage{
     private void selectSize(String clothSize){
         Select sizeDropDown= new Select(size);
         sizeDropDown.selectByVisibleText(clothSize);
+    }
+
+    public Boolean isQuickViewDialogDisplayed(){
+        switchToQuickView();
+        return addToCartBtn.isDisplayed();
+
+    }
+
+
+
+    private void switchToQuickView(){
+        wait.until(ExpectedConditions.visibilityOf(productQuickView));
+        driver.switchTo().frame(productQuickViewiFrame);
     }
 }

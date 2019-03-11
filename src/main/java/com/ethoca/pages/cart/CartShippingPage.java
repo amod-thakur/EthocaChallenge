@@ -19,7 +19,8 @@ public class CartShippingPage extends AbstractPage {
     @FindBy (xpath = "//button/span[contains(text(),'Proceed')]")
     private WebElement proceedToCheckoutBtn;
 
-
+    @FindBy(xpath = "//h1[contains(text(),'Shipping')]")
+    private WebElement shippingTitle;
 
     public CartPaymentsPage acceptTermsAndCheckout(){
 
@@ -31,5 +32,25 @@ public class CartShippingPage extends AbstractPage {
         return new CartPaymentsPage(driver);
 
     }
+
+    public Boolean isShippingTitlePresent(){
+
+        return shippingTitle.isDisplayed();
+    }
+
+    public TermsErrorModal proceedUncheckedTermsError(){
+        wait.until(ExpectedConditions.visibilityOf(proceedToCheckoutBtn));
+        proceedToCheckoutBtn.click();
+        return new TermsErrorModal(driver);
+
+    }
+
+    public CartShippingPage closeTermModalError(){
+        wait.until(ExpectedConditions.visibilityOf(proceedToCheckoutBtn));
+        TermsErrorModal termsErrorModal = proceedUncheckedTermsError();
+        return new CartShippingPage(driver);
+
+    }
+
 
 }

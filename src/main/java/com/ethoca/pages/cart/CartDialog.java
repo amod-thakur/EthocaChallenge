@@ -39,4 +39,14 @@ public class CartDialog extends AbstractPage {
 		return new LandingPage(driver);
 	}
 
+	public Boolean isProceedToCheckoutPresent(){
+
+		return  proceedToCheckOutBtn.isDisplayed();
+	}
+
+	public Boolean isContinueShoppingPresent(){
+
+		return  proceedToCheckOutBtn.isDisplayed();
+	}
+
 }
