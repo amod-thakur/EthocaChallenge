@@ -14,6 +14,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class DriverManagerFactory {
     private static WebDriver driver;
 
+    private DriverManagerFactory(){
+
+    }
+
     /**
      * This method instantiates respective driver object
      * @param browser the browser type e.g. chrome

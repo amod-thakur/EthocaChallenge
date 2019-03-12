@@ -32,7 +32,7 @@ public class SummerDressesPageTest extends BaseTest {
     }
 
     @Test(description = "validate Quick View funtionality")
-    public void validateQuickViewFuncationality(){
+    public void validateQuickViewFunctionality(){
         ItemQuickViewDialog itemQuickViewDialog=summerDressesPage.quickViewDress();
     }
 }
