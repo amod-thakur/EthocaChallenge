@@ -1,4 +1,4 @@
-<h3>Test Coding Challenge for Ethoca on automationpractice.com 
+<h3>Test Coding Challenge for Ethoca on automationpractice.com </h3>
 
 * The automation framework is developed using Selenium Web Driver. It uses Java as the programming language and TestNG as the Test Runner. 
 
