@@ -37,6 +37,7 @@ public class BaseTest {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
 		landingPage = openSite();
+
 	}
 
 	/**
@@ -60,6 +61,7 @@ public class BaseTest {
 	 */
 	public LandingPage openSite(){
 		driver.get(baseURL);
+
 		return new LandingPage(this.driver);
 	}
 }

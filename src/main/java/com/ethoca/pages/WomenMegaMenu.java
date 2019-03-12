@@ -10,7 +10,7 @@ public class WomenMegaMenu extends AbstractPage{
         super(driver);
     }
 
-    @FindBy(partialLinkText = "Summer Dresses")
+    @FindBy(xpath = "//li//a[@title='Summer Dresses']")
     private WebElement summerDresses;
 
     public SummerDressesPage selectSummerDresses(){

@@ -154,8 +154,10 @@ public class CreateAccountPage extends AbstractPage {
 
     public List<WebElement> createAccountErrorInvalidValues(){
         Map<String,String> userDetails = TestUtil.generateUserData();
+        wait.until(ExpectedConditions.visibilityOf(firstName));
 
         firstName.sendKeys(TestUtil.generateAlphaNumericData());
+        wait.until(ExpectedConditions.visibilityOf(lastName));
         lastName.sendKeys(TestUtil.generateNumericData());
         password.sendKeys(userDetails.get("password"));
 
@@ -167,18 +169,21 @@ public class CreateAccountPage extends AbstractPage {
         addressLine2.sendKeys(userDetails.get("addressLine2"));
         city.sendKeys(userDetails.get("city"));
         TestUtil.selectOptionByPartText(state,userDetails.get("state"));
+        wait.until(ExpectedConditions.visibilityOf(zip));
         zip.sendKeys(TestUtil.generateAlphaNumericData());
 
         additionalInfo.sendKeys(userDetails.get("additionalInfo"));
 
-
+        wait.until(ExpectedConditions.visibilityOf(mobile));
         mobile.sendKeys("abcasdewew");
 
         registerBtn.click();
+        wait.until(ExpectedConditions.visibilityOf(errorMessage));
 
         errorContentList = errorMessage.findElements(By.xpath("//ol//li"));
+        wait.until(ExpectedConditions.visibilityOf(errorContentList.get(0)));
 
-        errorTitle = driver.findElement(By.xpath("//p[contains(text(),\"4 errors\")]"));
+        errorTitle = driver.findElement(By.xpath("//p[contains(text(),\"errors\")]"));
         errorContentList.add(0,errorTitle);
         return errorContentList;
     }
