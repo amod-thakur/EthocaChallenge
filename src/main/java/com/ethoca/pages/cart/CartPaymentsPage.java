@@ -14,6 +14,9 @@ public class CartPaymentsPage extends AbstractPage {
         super(driver);
     }
 
+    @FindBy(xpath = "//h1[contains(text(),'Please choose your payment method')]")
+    private WebElement paymentTitle;
+
     @FindBy(id = "cart_summary")
     private WebElement cartTable;
 
@@ -85,11 +88,9 @@ public class CartPaymentsPage extends AbstractPage {
 
        return cartValues;
 
+    }
 
-
-
-
-
-
+    public Boolean isPaymentTitlePresent(){
+        return paymentTitle.isDisplayed();
     }
 }

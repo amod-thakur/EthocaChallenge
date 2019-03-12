@@ -18,9 +18,16 @@ public class CartAddressesPage extends AbstractPage {
     @FindBy (xpath = "//button/span[contains(text(),'Proceed')]")
     private WebElement proceedToCheckoutBtn;
 
+    @FindBy(xpath = "//h3[contains(text(),'Your delivery address')]")
+    private WebElement deliverAddressTitle;
+
     public CartShippingPage proceedToCheckout(){
         wait.until(ExpectedConditions.visibilityOf(proceedToCheckoutBtn));
         proceedToCheckoutBtn.click();
         return new CartShippingPage(driver);
+    }
+
+    public Boolean isDeliverAddressTitlePresent(){
+        return deliverAddressTitle.isDisplayed();
     }
 }

@@ -5,6 +5,8 @@ import com.ethoca.pages.AbstractPage;
 import com.ethoca.pages.ButtonsSection;
 import com.ethoca.pages.signin.CreateAccountPage;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class CartSummaryPage extends AbstractPage {
 
@@ -13,9 +15,11 @@ public class CartSummaryPage extends AbstractPage {
         super(driver);
         buttonsSection = new ButtonsSection(driver);
     }
+    @FindBy(id = "cart_title")
+    private WebElement summaryPgTitle;
 
 
-    private CartSignInPage proceedToCheckout(){
+    public CartSignInPage proceedToCheckout(){
 
         buttonsSection.proceedToCheckOut();
         return new CartSignInPage(driver);
@@ -30,6 +34,10 @@ public class CartSummaryPage extends AbstractPage {
         return cartShippingPage.acceptTermsAndCheckout();
 
 
+    }
+
+    public Boolean isSummaryPgTitlePresent(){
+        return  summaryPgTitle.isDisplayed();
     }
 
 

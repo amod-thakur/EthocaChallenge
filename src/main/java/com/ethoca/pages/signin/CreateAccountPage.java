@@ -3,12 +3,14 @@ package com.ethoca.pages.signin;
 import com.ethoca.pages.AbstractPage;
 import com.ethoca.pages.cart.CartAddressesPage;
 import com.ethoca.utilities.TestUtil;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.List;
 import java.util.Map;
 
 public class CreateAccountPage extends AbstractPage {
@@ -16,6 +18,8 @@ public class CreateAccountPage extends AbstractPage {
         super(driver);
     }
 
+    @FindBy(xpath = "//h3[contains(text(),'Your personal information')]")
+    private WebElement createAccountTitle;
 
     @FindBy(id ="id_gender1" )
     private WebElement titleMrRadioBtn;
@@ -80,6 +84,12 @@ public class CreateAccountPage extends AbstractPage {
     @FindBy(id = "submitAccount")
     private WebElement registerBtn;
 
+    @FindBy(className = "alert")
+    private WebElement errorMessage;
+
+    private List<WebElement> errorContentList;
+    private WebElement errorTitle;
+
 
     private Select dobDayDropDwn = new Select(dobDay);
     private Select dobYearDropDwn = new Select(dobYear);
@@ -126,6 +136,20 @@ public class CreateAccountPage extends AbstractPage {
         dobDayDropDwn.selectByValue(date[0]);
         TestUtil.selectOptionByPartText(dobMonth,date[1]);
         dobYearDropDwn.selectByValue(date[2]);
+    }
+
+    public Boolean isCreateAccountTitlePresent(){
+        return createAccountTitle.isDisplayed();
+    }
+
+    public List<WebElement> createAccountError(){
+
+
+        registerBtn.click();
+        errorContentList = errorMessage.findElements(By.xpath("//ol//li"));
+        errorTitle = driver.findElement(By.xpath("//p[contains(text(),\"8 errors\")]"));
+        errorContentList.add(0,errorTitle);
+        return errorContentList;
     }
 
 }

@@ -2,9 +2,12 @@ package com.ethoca.tests;
 
 
 
+import com.ethoca.pages.SummerDressesPage;
+import com.ethoca.pages.WomenMegaMenu;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import com.ethoca.pages.cart.CartDialog;
-import com.ethoca.pages.LandingPage;
+
 
 
 public class LandingPageTests extends BaseTest{
@@ -17,9 +20,12 @@ public class LandingPageTests extends BaseTest{
 
 	}
 	
-	@Test(description = "Validate successful navigation to  Shirts page")
+	@Test(description = "Validate successful navigation to  Summer Dresses page")
 	public void validateNavigationToTShirtPg(){
-		landingPage.navigateToTShirtsPg();
+
+		WomenMegaMenu womenMegaMenu =landingPage.navigateToWomenMegaMenu();
+		SummerDressesPage summerDressesPage =womenMegaMenu.selectSummerDresses();
+		Assert.assertNotNull(summerDressesPage);
 	}
 	
 	@Test(description = "Validate add to cart functionality")

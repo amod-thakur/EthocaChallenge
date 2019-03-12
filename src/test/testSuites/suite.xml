@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Ethoca Test Suite" >
+<suite name="Ethoca Test Suite" parallel="tests" thread-count="5" >
     <listeners>
         <listener class-name="com.ethoca.tests.listeners.ExtentReporterNG"/>
     </listeners>
@@ -16,10 +16,53 @@
             <class name="com.ethoca.tests.SummerDressesPageTest"/>
         </classes>
     </test>
-    <test name="Validate Cart Payment Page functionality">
-        <parameter name="browser" value="chrome"/>
+    <test name="Validate QuickView dialog functionality">
+        <parameter name="browser" value="chrome" />
+        <parameter name="size" value="M" />
         <classes>
-            <class name="com.ethoca.tests.ValidateCartTest"/>
+            <class name="com.ethoca.tests.ItemQuickViewDialogTest"/>
+        </classes>
+    </test>
+    <test name="Validate CartDialog functionality">
+        <parameter name="browser" value="chrome" />
+        <classes>
+            <class name="com.ethoca.tests.CartDialogTests"/>
+        </classes>
+    </test>
+    <test name="Validate Cart Section functionality">
+        <parameter name="browser" value="chrome" />
+        <classes>
+            <class name="com.ethoca.tests.CartSectionTest"/>
+        </classes>
+    </test>
+    <test name="Validate Cart Summary functionality">
+        <parameter name="browser" value="chrome" />
+        <classes>
+            <class name="com.ethoca.tests.CartSummaryPageTest"/>
+        </classes>
+    </test>
+    <test name="Validate Create Account functionality">
+        <parameter name="browser" value="chrome" />
+        <classes>
+            <class name="com.ethoca.tests.CreateAccountPageTest"/>
+        </classes>
+    </test>
+    <test name="Validate cart Address Page functionality">
+        <parameter name="browser" value="chrome" />
+        <classes>
+            <class name="com.ethoca.tests.CartAddressPageTest"/>
+        </classes>
+    </test>
+    <test name="Validate cart Shipping Page functionality">
+        <parameter name="browser" value="chrome" />
+        <classes>
+            <class name="com.ethoca.tests.CartShippingPageTest"/>
+        </classes>
+    </test>
+    <test name="Validate cart Payment Page functionality">
+        <parameter name="browser" value="chrome" />
+        <classes>
+            <class name="com.ethoca.tests.CartPaymentPageTest"/>
         </classes>
     </test>
 </suite>

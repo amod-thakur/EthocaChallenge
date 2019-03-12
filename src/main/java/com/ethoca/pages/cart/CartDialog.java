@@ -26,6 +26,7 @@ public class CartDialog extends AbstractPage {
 	public CartSummaryPage proceedToCheckout(){
 
 		driver.switchTo().defaultContent();
+		wait.until(ExpectedConditions.visibilityOf(proceedToCheckOutBtn));
 		proceedToCheckOutBtn.click();
 		return new CartSummaryPage(driver);
 	}
@@ -37,6 +38,16 @@ public class CartDialog extends AbstractPage {
 		executor.executeScript("arguments[0].click();", continueShoppingBtn);
 //		continueShoppingBtn.click();
 		return new LandingPage(driver);
+	}
+
+	public Boolean isProceedToCheckoutPresent(){
+
+		return  proceedToCheckOutBtn.isDisplayed();
+	}
+
+	public Boolean isContinueShoppingPresent(){
+
+		return  proceedToCheckOutBtn.isDisplayed();
 	}
 
 }

@@ -1,10 +1,10 @@
 package com.ethoca.tests;
 
 import com.ethoca.utilities.TestUtil;
-import com.ethoca.pages.LandingPage;
 import com.ethoca.pages.SummerDressesPage;
 import com.ethoca.pages.WomenMegaMenu;
 import com.ethoca.pages.cart.*;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -18,13 +18,14 @@ import java.util.Map;
  * @author  Amod Thakur
  *
  */
-public class ValidateCartTest extends BaseTest {
+public class CartPaymentPageTest extends BaseTest {
     private WomenMegaMenu womenMegaMenu = null;
     private SummerDressesPage summerDressesPage = null;
     private CartSummaryPage cartSummaryPage =null;
+    CartPaymentsPage cartPaymentsPage;
     private SoftAssert softAssert = new SoftAssert();
 
-    final static Logger log = Logger.getLogger(ValidateCartTest.class);
+    final static Logger log = Logger.getLogger(CartPaymentPageTest.class);
 
     @BeforeMethod
     public void setup() {
@@ -33,16 +34,22 @@ public class ValidateCartTest extends BaseTest {
         summerDressesPage.addDressToCart("M");
         landingPage = summerDressesPage.continueShopping();
         cartSummaryPage = landingPage.navigateToCheckoutPage();
+        cartPaymentsPage =cartSummaryPage.checkoutAsNewUser();
     }
 
 
-      @Test(dataProvider = "ProductDetails", description = "Validate Cart contents with the test xls")
+    @Test
+     public void validatePaymentIsLoaded(){
+        Assert.assertTrue(cartPaymentsPage.isPaymentTitlePresent());
+
+    }
+
+    @Test(dataProvider = "ProductDetails", description = "Validate Cart contents with the test xls")
     public void validateAllCartDetails(Map<Object,Object> expectedData){
 
 
         log.info("The expected data is : "+expectedData);
 
-        CartPaymentsPage cartPaymentsPage =cartSummaryPage.checkoutAsNewUser();
 
         Map<String,String> actualData = cartPaymentsPage.readCartTable();
 
@@ -50,7 +57,7 @@ public class ValidateCartTest extends BaseTest {
 
         softAssert.assertEquals(actualData.get("productImageURL"),expectedData.get("productImageURL"),"The image URL doesn't match with the expected value");
 
-        softAssert.assertEquals(actualData.get("productImageAlt"),expectedData.get("productImage"),"The image Text doesn't match");
+        softAssert.assertEquals(actualData.get("productImageAlt"),expectedData.get("productImageAlt"),"The image Text doesn't match");
 
         softAssert.assertEquals(actualData.get("productDescription"),expectedData.get("productDescription"),"The product description doesn't match");
 
