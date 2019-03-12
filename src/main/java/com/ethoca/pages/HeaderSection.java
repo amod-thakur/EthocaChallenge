@@ -29,6 +29,7 @@ public class HeaderSection extends AbstractPage{
     }
 
     public WomenMegaMenu openWomenMegaMenu(){
+        wait.until(ExpectedConditions.visibilityOf(womenMegaMenu));
         TestUtil.hoverOverElement(womenMegaMenu,driver);
 
 

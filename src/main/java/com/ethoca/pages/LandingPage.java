@@ -6,6 +6,7 @@ import com.ethoca.pages.cart.CartSummaryPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 
 /**
@@ -72,7 +73,7 @@ public class LandingPage  extends AbstractPage{
 	}
 	
 	public CartDialog addItemToCart(){
-
+		wait.until(ExpectedConditions.visibilityOf(productName));
 		actions.moveToElement(productName).perform();
 		addToCartBtn.click();
 		return new CartDialog(this.driver);
@@ -86,6 +87,7 @@ public class LandingPage  extends AbstractPage{
 	}
 
 	public WomenMegaMenu navigateToWomenMegaMenu(){
+
 		headerSection.openWomenMegaMenu();
 		return new WomenMegaMenu(driver);
 	}

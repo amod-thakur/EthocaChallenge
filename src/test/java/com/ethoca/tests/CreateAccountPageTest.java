@@ -67,7 +67,7 @@ public class CreateAccountPageTest extends BaseTest {
     }
 
     @Test
-    public void validateErrorIsDisplayedForCreateAccountWithoutInvalidData(){
+    public void validateErrorIsDisplayedForCreateAccountWithInvalidData(){
         createAccountPage = cartSignInPage.createNewAccount();
         List<WebElement> errorDetails = createAccountPage.createAccountErrorInvalidValues();
         softAssert.assertEquals(errorDetails.get(0).getText(),"There are 4 errors");
