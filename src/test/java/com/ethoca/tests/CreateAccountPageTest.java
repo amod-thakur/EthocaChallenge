@@ -5,6 +5,7 @@ import com.ethoca.pages.SummerDressesPage;
 import com.ethoca.pages.WomenMegaMenu;
 import com.ethoca.pages.cart.*;
 import com.ethoca.pages.signin.CreateAccountPage;
+import com.ethoca.utilities.Log;
 import com.ethoca.utilities.TestUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -51,6 +52,7 @@ public class CreateAccountPageTest extends BaseTest {
 
     @Test
     public void validateErrorIsDisplayedForCreateAccountWithoutData(){
+        Log.info("Testing Account creation without any data");
         createAccountPage = cartSignInPage.createNewAccount();
         List<WebElement> errorDetails = createAccountPage.createAccountErrorAllBlank();
         softAssert.assertEquals(errorDetails.get(0).getText(),"There are 8 errors");
