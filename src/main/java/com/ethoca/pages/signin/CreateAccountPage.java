@@ -142,12 +142,43 @@ public class CreateAccountPage extends AbstractPage {
         return createAccountTitle.isDisplayed();
     }
 
-    public List<WebElement> createAccountError(){
+    public List<WebElement> createAccountErrorAllBlank(){
 
 
         registerBtn.click();
         errorContentList = errorMessage.findElements(By.xpath("//ol//li"));
         errorTitle = driver.findElement(By.xpath("//p[contains(text(),\"8 errors\")]"));
+        errorContentList.add(0,errorTitle);
+        return errorContentList;
+    }
+
+    public List<WebElement> createAccountErrorInvalidValues(){
+        Map<String,String> userDetails = TestUtil.generateUserData();
+
+        firstName.sendKeys(TestUtil.generateAlphaNumericData());
+        lastName.sendKeys(TestUtil.generateNumericData());
+        password.sendKeys(userDetails.get("password"));
+
+        selectDob(userDetails.get("dob"));
+
+        addressFirstName.sendKeys(userDetails.get("firstName"));
+        addressLastName.sendKeys(userDetails.get("lastName"));
+        addressLine1.sendKeys(userDetails.get("addressLine1"));
+        addressLine2.sendKeys(userDetails.get("addressLine2"));
+        city.sendKeys(userDetails.get("city"));
+        TestUtil.selectOptionByPartText(state,userDetails.get("state"));
+        zip.sendKeys(TestUtil.generateAlphaNumericData());
+
+        additionalInfo.sendKeys(userDetails.get("additionalInfo"));
+
+
+        mobile.sendKeys("abcasdewew");
+
+        registerBtn.click();
+
+        errorContentList = errorMessage.findElements(By.xpath("//ol//li"));
+
+        errorTitle = driver.findElement(By.xpath("//p[contains(text(),\"4 errors\")]"));
         errorContentList.add(0,errorTitle);
         return errorContentList;
     }

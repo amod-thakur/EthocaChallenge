@@ -75,6 +75,25 @@ public class TestUtil extends AbstractPage {
         return  RandomStringUtils.randomAlphanumeric(10);
     }
 
+
+    /**
+     * This method is used to generate a random 10 character  numeric string.
+     * @return
+     */
+
+    public static String generateNumericData(){
+        return  RandomStringUtils.randomNumeric(10);
+    }
+
+    /**
+     * This method is used to generate a random 10 character alpha numeric string.
+     * @return
+     */
+
+    public static String generateAlphaNumericData(){
+        return  RandomStringUtils.randomAlphanumeric(10);
+    }
+
     /**
      * This method is used to generate the user details required for creating an account
      * @return - a Map containing the user data
