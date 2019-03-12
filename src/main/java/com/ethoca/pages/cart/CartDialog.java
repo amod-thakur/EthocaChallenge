@@ -36,7 +36,6 @@ public class CartDialog extends AbstractPage {
 		wait.until(ExpectedConditions.visibilityOf(continueShoppingBtn));
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", continueShoppingBtn);
-//		continueShoppingBtn.click();
 		return new LandingPage(driver);
 	}
 

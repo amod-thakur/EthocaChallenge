@@ -180,26 +180,6 @@ public class TestUtil extends AbstractPage {
     }
 
 
-    public static void takeScreenshotAtEndOfTest(WebDriver driver) throws IOException {
-        File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        String currentDir = System.getProperty("user.dir");
-        FileUtils.copyFile(scrFile, new File(currentDir + "/screenshots/" + System.currentTimeMillis() + ".png"));
-    }
-
-
-    public static String getScreenshot(WebDriver driver, String screenshotName) throws IOException{
-
-        String dateName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
-        TakesScreenshot ts = (TakesScreenshot) driver;
-        File source = ts.getScreenshotAs(OutputType.FILE);
-
-        // after execution, you could see a folder "FailedTestsScreenshots"
-        // under src folder
-        String destination = System.getProperty("user.dir") + "test-output/FailedTestsScreenshots/" + screenshotName +  "_Failed.png";
-        File finalDestination = new File(destination);
-        FileUtils.copyFile(source, finalDestination);
-        return destination;
-    }
 
 }
 

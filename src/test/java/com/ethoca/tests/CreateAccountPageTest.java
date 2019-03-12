@@ -44,7 +44,7 @@ public class CreateAccountPageTest extends BaseTest {
     }
 
     @Test
-    public void validateUserAccoutCreation(){
+    public void validateUserAccountCreation(){
         createAccountPage = cartSignInPage.createNewAccount();
         CartAddressesPage cartAddressesPage = createAccountPage.registerNewUser(TestUtil.generateUserData());
         Assert.assertTrue(cartAddressesPage.isDeliverAddressTitlePresent());

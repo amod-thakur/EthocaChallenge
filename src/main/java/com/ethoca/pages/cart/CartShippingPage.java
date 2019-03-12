@@ -48,6 +48,8 @@ public class CartShippingPage extends AbstractPage {
     public CartShippingPage closeTermModalError(){
         wait.until(ExpectedConditions.visibilityOf(proceedToCheckoutBtn));
         TermsErrorModal termsErrorModal = proceedUncheckedTermsError();
+        termsErrorModal.closeTermsError();
+
         return new CartShippingPage(driver);
 
     }
