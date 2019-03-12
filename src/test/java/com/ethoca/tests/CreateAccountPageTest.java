@@ -31,18 +31,18 @@ public class CreateAccountPageTest extends BaseTest {
          cartSignInPage =  cartSummaryPage.proceedToCheckout();
     }
 
-    @Test(enabled = false)
+    @Test
     public void validateCartSummaryPageIsLoaded(){
         Assert.assertTrue(cartSignInPage.isCreateAnAccountSectionPresent());
     }
 
-    @Test(enabled = false)
+    @Test
     public void validateProceedToCheckOutWorks(){
         createAccountPage = cartSignInPage.createNewAccount();
         Assert.assertTrue(createAccountPage.isCreateAccountTitlePresent());
     }
 
-    @Test(enabled = false)
+    @Test
     public void validateUserAccoutCreation(){
         createAccountPage = cartSignInPage.createNewAccount();
         CartAddressesPage cartAddressesPage = createAccountPage.registerNewUser(TestUtil.generateUserData());
@@ -52,8 +52,7 @@ public class CreateAccountPageTest extends BaseTest {
     @Test
     public void validateErrorIsDisplayedForCreateAccountWithoutData(){
         createAccountPage = cartSignInPage.createNewAccount();
-        List<WebElement> errorDetails = createAccountPage.createAccountError();
-
+        List<WebElement> errorDetails = createAccountPage.createAccountErrorAllBlank();
         softAssert.assertEquals(errorDetails.get(0).getText(),"There are 8 errors");
         softAssert.assertEquals(errorDetails.get(1).getText(),"You must register at least one phone number.");
         softAssert.assertEquals(errorDetails.get(2).getText(),"lastname is required.");
@@ -65,6 +64,18 @@ public class CreateAccountPageTest extends BaseTest {
         softAssert.assertEquals(errorDetails.get(8).getText(),"This country requires you to choose a State.");
         softAssert.assertAll();
 
+    }
+
+    @Test
+    public void validateErrorIsDisplayedForCreateAccountWithoutInvalidData(){
+        createAccountPage = cartSignInPage.createNewAccount();
+        List<WebElement> errorDetails = createAccountPage.createAccountErrorInvalidValues();
+        softAssert.assertEquals(errorDetails.get(0).getText(),"There are 4 errors");
+        softAssert.assertEquals(errorDetails.get(1).getText(),"lastname is invalid.");
+        softAssert.assertEquals(errorDetails.get(2).getText(),"firstname is invalid.");
+        softAssert.assertEquals(errorDetails.get(3).getText(),"phone_mobile is invalid.");
+        softAssert.assertEquals(errorDetails.get(4).getText(),"The Zip/Postal code you've entered is invalid. It must follow this format: 00000");
+        softAssert.assertAll();
 
     }
 
